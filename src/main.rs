@@ -34,10 +34,11 @@ fn create(scan: Json<Scan>) -> Json<Scan> {
 
 #[get("/")]
 fn read() -> Json<Value> {
-    Json(json!([
-        "scan 1", 
-        "scan 2"
-    ]))    
+    let ordered_scans = scans::table.order(scans::id.asc())
+        .load::<Scan>(&establish_connection())
+        .unwrap();
+          
+    Json(json!(ordered_scans))
 }
 
 #[put("/<id>", data = "<scan>")]
