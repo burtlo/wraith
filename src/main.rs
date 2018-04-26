@@ -10,7 +10,6 @@ extern crate rocket;
 
 use rocket_contrib::{Json, Value};
 
-
 use diesel::prelude::*;
 use dotenv::dotenv;
 use std::env;
@@ -57,21 +56,23 @@ fn hello(name: String, age: u8) -> String {
 }
 
 fn main() {
+
+    let scan_one = Scan {
+        id: Some(1),
+        data: "{ \"scan\" : \"1\" }".to_string()
+    };
+
+    diesel::insert_into(scans::table)
+        .values(&scan_one)
+        .execute(&establish_connection())
+        .expect("Error saving example description");
+ 
+
     rocket::ignite()
         .mount("/scans", routes![create, read, update, delete])
         .mount("/hello",routes![hello])
         .launch();
 
 
-
-    let scan_one = Scan {
-        id: 1,
-        body: "{ \"scan\" : \"1\" }"
-    }
-
-    diesel::insert_into(scans::table)
-        .values(&scan_one)
-        .execute(establish_connection())
-        .expect("Error saving example description");
-    
+   
 }
