@@ -18,6 +18,7 @@ use std::env;
 mod schema;
 mod scan;
 use scan::{Scan};
+use schema::scans;
 
 pub fn establish_connection() -> SqliteConnection {
     dotenv().ok();
