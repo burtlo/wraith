@@ -1,4 +1,6 @@
 
+testdb.sqlite
+
 /target/
 **/*.rs.bk
 Cargo.lock
