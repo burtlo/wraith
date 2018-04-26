@@ -1,6 +1,6 @@
 table! {
     scans (id) {
-        id -> Integer,
+        id -> Nullable<Integer>,
         data -> Text,
     }
 }
