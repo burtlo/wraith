@@ -1,0 +1,4 @@
+CREATE TABLE scans (
+    id INTEGER PRIMARY KEY,
+    data TEXT NOT NULL
+)
